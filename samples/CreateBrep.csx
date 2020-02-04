@@ -1,4 +1,11 @@
-      public BRepBuilder CreateBrepSolid()
+//
+// CmdBrepBuilder.cs - create DirectShape using BrepBuilder and Boolean difference
+//
+// Copyright (C) 2018-2019 by Jeremy Tammik, Autodesk Inc. All rights reserved.
+//
+// Keywords: The Building Coder Revit API C# .NET add-in.
+//
+public BRepBuilder CreateBrepSolid()
     {
       BRepBuilder b = new BRepBuilder( BRepType.Solid );
 
