@@ -38,6 +38,21 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp.Features">
+      <HintPath>..\..\lib\Microsoft.CodeAnalysis.CSharp.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp.Workspaces">
+      <HintPath>..\..\lib\Microsoft.CodeAnalysis.CSharp.Workspaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.Features">
+      <HintPath>..\..\lib\Microsoft.CodeAnalysis.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.FlowAnalysis.Utilities">
+      <HintPath>..\..\lib\Microsoft.CodeAnalysis.FlowAnalysis.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DiaSymReader">
+      <HintPath>..\..\lib\Microsoft.DiaSymReader.dll</HintPath>
+    </Reference>
     <Reference Include="RoslynPad.Editor.Windows">
       <HintPath>..\..\lib\RoslynPad.Editor.Windows.dll</HintPath>
     </Reference>
@@ -58,6 +73,10 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Reactive">
+      <HintPath>..\..\lib\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
