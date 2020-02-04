@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Revit.ScriptCS.ScriptRunner", "src\Revit.ScriptCS.ScriptRunner\Revit.ScriptCS.ScriptRunner.csproj", "{F831E5C7-ABC5-476A-88CB-638783F266D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F831E5C7-ABC5-476A-88CB-638783F266D0}.Debug|x64.ActiveCfg = Debug|x64
+		{F831E5C7-ABC5-476A-88CB-638783F266D0}.Debug|x64.Build.0 = Debug|x64
+		{F831E5C7-ABC5-476A-88CB-638783F266D0}.Release|x64.ActiveCfg = Release|x64
+		{F831E5C7-ABC5-476A-88CB-638783F266D0}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {82ED38C6-53D9-46C2-8C9C-46079962E637}
+	EndGlobalSection
+EndGlobal

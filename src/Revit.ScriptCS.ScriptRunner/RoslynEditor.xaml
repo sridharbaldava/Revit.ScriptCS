@@ -1,0 +1,86 @@
+﻿<Window x:Class="Revit.ScriptCS.ScriptRunner.RoslynEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Revit.ScriptCS.ScriptRunner"
+             xmlns:editor="clr-namespace:RoslynPad.Editor;assembly=RoslynPad.Editor.Windows"
+        xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Revit.ScriptCS.ScriptRunner;component/Resources/Icons.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <!--<StackPanel HorizontalAlignment="Left" Grid.Column="0">
+            <Button Name="ScriptRunner" Click="ScriptRunner_Click">Run Script</Button>
+        </StackPanel>-->
+        <ToolBar Grid.Row="0">
+            <Button x:Name="New" Command="{Binding NewCommand}" ToolTip="New Script">
+                <ContentControl Template="{StaticResource ResourceKey=NewFile}"></ContentControl>
+            </Button>
+            <Button x:Name="Open" Command="{Binding OpenCommand}">
+                <ContentControl Template="{StaticResource ResourceKey=OpenFile}" ToolTip="Open Script"></ContentControl>
+            </Button>
+            <Separator></Separator>
+            <Button x:Name="Save" Command="{Binding ActiveDocument.SaveCommand}" ToolTip="Save Script">
+                <ContentControl Template="{StaticResource ResourceKey=SaveFile}"></ContentControl>
+            </Button>
+            <Button x:Name="Save_As" Command="{Binding ActiveDocument.SaveAsCommand}" ToolTip="Save As Script">
+                <ContentControl Template="{StaticResource ResourceKey=SaveAsFile}"></ContentControl>
+            </Button>
+            <!--<Button x:Name="CloseScript" Command="{Binding ActiveDocument.CloseCommand}" Content="Close"></Button>-->
+            <Separator></Separator>
+            <Button x:Name="Run" Command="{Binding ActiveDocument.RunCommand}" ToolTip="Run Script">
+                <ContentControl Template="{StaticResource ResourceKey=RunScript}"></ContentControl>
+            </Button>
+        </ToolBar>
+        <avalonDock:DockingManager x:Name="dockManager"
+                                   DocumentsSource="{Binding Documents}"
+                                   ActiveContent="{Binding ActiveDocument, Mode=TwoWay}"
+                                   Grid.Row="1">
+            <avalonDock:DockingManager.DocumentHeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Content.Title}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </avalonDock:DockingManager.DocumentHeaderTemplate>
+            <avalonDock:DockingManager.LayoutItemTemplateSelector>
+                <local:DocumentTemplateSelector>
+                    <local:DocumentTemplateSelector.DocumentViewTemplate>
+                        <DataTemplate>
+                            <editor:RoslynCodeEditor x:Name="CodeEditor"                                                      
+                                                     IsReadOnly="{Binding IsReadOnly}"
+                                                     IsModified="{Binding IsDirty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                     Loaded="CodeEditor_Loaded">
+                                <!--Document="{Binding Document, UpdateSourceTrigger=PropertyChanged}"-->
+                            </editor:RoslynCodeEditor>
+                        </DataTemplate>
+                    </local:DocumentTemplateSelector.DocumentViewTemplate>                
+                </local:DocumentTemplateSelector>
+            </avalonDock:DockingManager.LayoutItemTemplateSelector>
+            <avalonDock:LayoutRoot>
+                <avalonDock:LayoutPanel Orientation="Vertical">
+                    <avalonDock:LayoutDocumentPane></avalonDock:LayoutDocumentPane>
+                </avalonDock:LayoutPanel>
+            </avalonDock:LayoutRoot>
+        </avalonDock:DockingManager>
+        <!--<editor:RoslynCodeEditor x:Name="CodeEditor" SyntaxHighlighting="C#" Grid.Column="0" Grid.Row="1" ShowLineNumbers="False" Margin="5" Loaded="CodeEditor_Loaded"></editor:RoslynCodeEditor>-->
+        <TextBlock Text="{Binding Result}" Grid.Column="0" Grid.Row="2" Margin="5"></TextBlock>
+
+    </Grid>
+
+</Window>
