@@ -184,8 +184,6 @@ namespace Revit.ScriptCS.ScriptRunner
         //    typeof(Compilation).GetMethod(nameof(HasSubmissionResult), BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
 
-
-        #region SaveCommand
         RelayCommand _saveCommand = null;
         public ICommand SaveCommand
         {
@@ -220,9 +218,7 @@ namespace Revit.ScriptCS.ScriptRunner
             return document.GetTextAsync().Result.ToString();
         }
 
-        #endregion
 
-        #region SaveAsCommand
         RelayCommand _saveAsCommand = null;
         public ICommand SaveAsCommand
         {
@@ -248,9 +244,6 @@ namespace Revit.ScriptCS.ScriptRunner
             RoslynEditorViewModel.Save(this, true);
         }
 
-        #endregion
-
-        #region CloseCommand
         RelayCommand _closeCommand = null;
         public ICommand CloseCommand
         {
@@ -274,7 +267,6 @@ namespace Revit.ScriptCS.ScriptRunner
         {
            RoslynEditorViewModel.Close(this);
         }
-        #endregion
 
         RelayCommand _runCommand = null;
         public ICommand RunCommand

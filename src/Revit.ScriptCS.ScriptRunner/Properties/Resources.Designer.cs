@@ -79,5 +79,35 @@ namespace Revit.ScriptCS.ScriptRunner.Properties {
                 return ResourceManager.GetString("Icons", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_Csharp {
+            get {
+                object obj = ResourceManager.GetObject("logo_Csharp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_Csharp_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("logo_Csharp_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_Csharp_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("logo_Csharp_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

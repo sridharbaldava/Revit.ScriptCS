@@ -121,4 +121,13 @@
   <data name="Icons" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons.xaml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="logo_Csharp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_Csharp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo_Csharp_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_Csharp_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo_Csharp_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_Csharp_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

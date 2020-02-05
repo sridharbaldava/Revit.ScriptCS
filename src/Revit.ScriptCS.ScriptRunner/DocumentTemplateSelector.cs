@@ -15,7 +15,6 @@ namespace Revit.ScriptCS.ScriptRunner
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            var itemAsLayoutContent = item as LayoutContent;
             if ( item is DocumentViewModel )
                 return DocumentViewTemplate;
 

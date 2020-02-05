@@ -49,7 +49,6 @@ namespace Revit.ScriptCS.ScriptRunner
             }
         }
 
-        #region OpenCommand
         RelayCommand _openCommand = null;
         public ICommand OpenCommand
         {
@@ -91,9 +90,6 @@ namespace Revit.ScriptCS.ScriptRunner
             return DocumentViewModel;
         }
 
-        #endregion
-
-        #region NewCommand
         RelayCommand _newCommand = null;
         public ICommand NewCommand
         {
@@ -120,10 +116,6 @@ namespace Revit.ScriptCS.ScriptRunner
             ActiveDocument = _documents.Last();
         }
 
-        #endregion
-
-        #region ActiveDocument
-
         private DocumentViewModel _activeDocument = null;
         public DocumentViewModel ActiveDocument
         {
@@ -140,8 +132,6 @@ namespace Revit.ScriptCS.ScriptRunner
         }
 
         public event EventHandler ActiveDocumentChanged;
-
-        #endregion
 
         internal void Close(DocumentViewModel fileToClose)
         {

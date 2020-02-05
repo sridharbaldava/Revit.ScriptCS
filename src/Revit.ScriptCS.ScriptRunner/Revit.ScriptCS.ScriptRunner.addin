@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <RevitAddIns>
-  <AddIn Type="Command">
-    <Name>Script Runner Command</Name>
-    <FullClassName>Revit.ScriptCS.ScriptRunner.ScriptRunnerExternalCommand</FullClassName>
-    <Text>Run C# Scripts</Text>
-    <Description>Run C# Scripts</Description>
-    <VisibilityMode>NotVisibleInFamily</VisibilityMode>
-    <Assembly>C:\Git\External\Revit.ScriptCS\src\Revit.ScriptCS.ScriptRunner\bin\x64\Debug\Revit.ScriptCS.ScriptRunner.dll</Assembly>
-    <AddInId>188EDBEC-10A2-465B-8A1D-4C8F186490FD</AddInId>
-    <VendorId>com.walterpmoore</VendorId>
-    <VendorDescription>Walter P Moore</VendorDescription>
-  </AddIn>
   <AddIn Type="Application">
     <Name>Script Runner App</Name>
     <FullClassName>Revit.ScriptCS.ScriptRunner.ScriptRunnerApp</FullClassName>
