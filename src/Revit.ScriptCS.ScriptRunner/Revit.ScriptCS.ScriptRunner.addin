@@ -6,7 +6,7 @@
     <Text>Run C# Scripts</Text>
     <Description>Run C# Scripts</Description>
     <VisibilityMode>NotVisibleInFamily</VisibilityMode>
-    <Assembly>C:\Git\External\Revit.ScriptCS\src\Revit.ScriptCS.ScriptRunner\bin\x64\Debug\Revit.ScriptCS.ScriptRunner.dll</Assembly>
+    <Assembly>Revit.ScriptCS.ScriptRunner.dll</Assembly>
     <AddInId>D8DD49C1-CD1A-46DB-81E5-51A7864D6EF8</AddInId>
     <VendorId>com.walterpmoore</VendorId>
     <VendorDescription>Walter P Moore</VendorDescription>

@@ -64,11 +64,11 @@
     </Reference>
     <Reference Include="RevitAPI">
       <HintPath>$(ProgramW6432)\Autodesk\Revit 2019\RevitAPI.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="RevitAPIUI">
       <HintPath>$(ProgramW6432)\Autodesk\Revit 2019\RevitAPIUI.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
