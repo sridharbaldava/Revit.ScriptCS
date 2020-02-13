@@ -19,7 +19,7 @@ namespace Revit.ScriptCS.ScriptRunner
         public RoslynEditor(RoslynEditorViewModel document)
         {
             InitializeComponent();
-            DataContext = document;
+            DataContext = document;            
         }
 
         private void CodeEditor_Loaded(object sender, RoutedEventArgs e)
@@ -36,8 +36,15 @@ namespace Revit.ScriptCS.ScriptRunner
                 workingDirectory, string.Empty);
 
             documentViewModel.Initialize(documentId);
+            editor.Document.TextChanged += documentViewModel.OnTextChanged;
         }
 
-
+        private void dockManager_DocumentClosing(object sender, Xceed.Wpf.AvalonDock.DocumentClosingEventArgs e)
+        {
+            e.Cancel = true;
+            var documentViewModel = (DocumentViewModel)e.Document.Content;
+            var viewModel = (RoslynEditorViewModel)DataContext;
+            viewModel.Close(documentViewModel);
+        }
     }
 }

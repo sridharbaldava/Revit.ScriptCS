@@ -1,6 +1,7 @@
 ﻿using ICSharpCode.AvalonEdit.Utils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
+using System;
 using System.IO;
 using System.Windows.Input;
 using TextDocument = ICSharpCode.AvalonEdit.Document.TextDocument;
@@ -37,8 +38,14 @@ namespace Revit.ScriptCS.ScriptRunner
                 if ( doc != null )
                 {
                     RoslynEditorViewModel.Host.UpdateDocument(doc.WithText(SourceText.From(_document.Text)));
+                    IsDirty = false;
                 }
             }
+        }
+
+        internal void OnTextChanged(object sender, EventArgs e)
+        {
+            IsDirty = true;
         }
 
         public DocumentId Id { get; private set; }

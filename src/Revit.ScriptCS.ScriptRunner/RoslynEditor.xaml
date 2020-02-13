@@ -50,11 +50,12 @@
         <avalonDock:DockingManager x:Name="dockManager"
                                    DocumentsSource="{Binding Documents}"
                                    ActiveContent="{Binding ActiveDocument, Mode=TwoWay}"
+                                   DocumentClosing="dockManager_DocumentClosing"
                                    Grid.Row="1">
             <avalonDock:DockingManager.DocumentHeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Content.Title}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{Binding Content.FileName, Mode=OneWay}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </avalonDock:DockingManager.DocumentHeaderTemplate>
@@ -65,7 +66,8 @@
                             <editor:RoslynCodeEditor x:Name="CodeEditor"                                                      
                                                      IsReadOnly="{Binding IsReadOnly}"
                                                      IsModified="{Binding IsDirty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                     Loaded="CodeEditor_Loaded">
+                                                     Loaded="CodeEditor_Loaded"
+                                                     >
                                 <!--Document="{Binding Document, UpdateSourceTrigger=PropertyChanged}"-->
                             </editor:RoslynCodeEditor>
                         </DataTemplate>

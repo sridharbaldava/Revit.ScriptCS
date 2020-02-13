@@ -37,7 +37,7 @@ namespace Revit.ScriptCS.ScriptRunner
                 "System.Linq"
             };
 
-            var globals = new ScriptGlobals { doc = app.ActiveUIDocument.Document };
+            var globals = new ScriptGlobals { doc = app.ActiveUIDocument.Document, uidoc = app.ActiveUIDocument };
 
             var options = ScriptOptions.Default.AddReferences(assembliesToRef).WithImports(namespaces);
 

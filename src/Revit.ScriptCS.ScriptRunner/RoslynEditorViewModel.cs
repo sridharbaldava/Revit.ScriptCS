@@ -71,6 +71,7 @@ namespace Revit.ScriptCS.ScriptRunner
         private void OnOpen(object parameter)
         {
             var dlg = new OpenFileDialog();
+            dlg.Filter = "C# Script file (*.csx)|*.csx";
             if ( dlg.ShowDialog().GetValueOrDefault() )
             {
                 var DocumentViewModel = Open(dlg.FileName);
