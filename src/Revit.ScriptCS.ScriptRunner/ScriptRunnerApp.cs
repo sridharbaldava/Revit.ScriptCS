@@ -3,27 +3,23 @@ using RoslynPad.Roslyn;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace Revit.ScriptCS.ScriptRunner
 {
     public class ScriptRunnerApp : IExternalApplication
     {
         internal static ScriptRunnerApp thisApp = null;
-        static string ExecutingAssemblyPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+        static readonly string ExecutingAssemblyPath = Assembly.GetExecutingAssembly().Location;
         private Window scriptEditor;
+
+        private Thread scriptEditorThread;
         public Result OnShutdown(UIControlledApplication application)
         {
-            if ( scriptEditor != null && scriptEditor.IsLoaded )
-            {
-                scriptEditor.Close();
-            }
             return Result.Succeeded;
         }
 
@@ -52,7 +48,7 @@ namespace Revit.ScriptCS.ScriptRunner
                 using ( var s = a.GetManifestResourceStream(name) )
                 {
                     return BitmapFrame.Create(s);
-                }              
+                }
             }
             catch
             {
@@ -64,32 +60,29 @@ namespace Revit.ScriptCS.ScriptRunner
         {
             try
             {
-
-                if ( scriptEditor == null || !scriptEditor.IsLoaded )
+                if ( scriptEditorThread is null || !scriptEditorThread.IsAlive )
                 {
                     var handler = new ScriptRunnerHandler();
                     ExternalEvent externalEvent = ExternalEvent.Create(handler);
                     var assembliesToRef = new List<Assembly>
-                {
-                    typeof(object).Assembly, //mscorlib
-                    typeof(Autodesk.Revit.UI.UIApplication).Assembly,
-                    typeof(Autodesk.Revit.DB.Document).Assembly,
-                    Assembly.Load("RoslynPad.Roslyn.Windows"),
-                    Assembly.Load("RoslynPad.Editor.Windows")
-                };
+                    {
+                        typeof(object).Assembly, //mscorlib
+                        typeof(Autodesk.Revit.UI.UIApplication).Assembly,
+                        typeof(Autodesk.Revit.DB.Document).Assembly,
+                        Assembly.Load("RoslynPad.Roslyn.Windows"),
+                        Assembly.Load("RoslynPad.Editor.Windows")
+                    };
 
                     var namespaces = new List<string>
-                {
-                    "Autodesk.Revit.UI",
-                    "Autodesk.Revit.DB",
-                    "Autodesk.Revit.DB.Structure",
-                    "System",
-                    "System.Collections.Generic",
-                    "System.IO",
-                    "System.Linq"
-                };
-
-                    //var roslynHostReferences = RoslynHostReferences.Empty.With(imports: namespaces);
+                    {
+                        "Autodesk.Revit.UI",
+                        "Autodesk.Revit.DB",
+                        "Autodesk.Revit.DB.Structure",
+                        "System",
+                        "System.Collections.Generic",
+                        "System.IO",
+                        "System.Linq"
+                    };
 
                     var roslynHost = new RevitRoslynHost(
                         additionalAssemblies: assembliesToRef,
@@ -97,15 +90,31 @@ namespace Revit.ScriptCS.ScriptRunner
                         disabledDiagnostics: ImmutableArray.Create("CS1701", "CS1702", "CS0518"));
 
                     var document = new RoslynEditorViewModel(roslynHost, externalEvent, handler);
-                    scriptEditor = new RoslynEditor(document);
-                    scriptEditor.Show();
+
+                    scriptEditorThread = new Thread(new ThreadStart(() =>
+                    {
+                        SynchronizationContext.SetSynchronizationContext(
+                            new DispatcherSynchronizationContext(
+                                Dispatcher.CurrentDispatcher));
+
+                        scriptEditor = new RoslynEditor(document);
+
+                        scriptEditor.Closed += (s, e) => Dispatcher.CurrentDispatcher.InvokeShutdown();
+                        scriptEditor.Show();
+                        Dispatcher.Run();
+                    }));
+
+                    scriptEditorThread.SetApartmentState(ApartmentState.STA);
+                    scriptEditorThread.IsBackground = true;
+                    scriptEditorThread.Start();
                 }
             }
-            catch ( Exception ex)
+            catch ( Exception ex )
             {
                 TaskDialog.Show("Error", ex.Message);
                 //throw;
             }
         }
+
     }
 }
