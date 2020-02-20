@@ -1,5 +1,6 @@
 ﻿using ICSharpCode.AvalonEdit.Utils;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Text;
 using System;
 using System.IO;
@@ -297,6 +298,32 @@ namespace Revit.ScriptCS.ScriptRunner
         {
             Text = GetCode();
             RoslynEditorViewModel.Run(this);
+        }
+
+        RelayCommand _formatCommand = null;
+
+        public ICommand FormatCommand
+        {
+            get 
+            {
+                if(_formatCommand == null)
+                {
+                    _formatCommand = new RelayCommand(p => OnFormat(), p => CanFormat());
+                }
+                return _formatCommand;
+            }
+        }
+
+        private bool CanFormat()
+        {
+            return true;
+        }
+
+        private void OnFormat()
+        {
+            var document = RoslynEditorViewModel.Host.GetDocument(Id);
+            var formattedDocument = Formatter.FormatAsync(document).Result;
+            RoslynEditorViewModel.Host.UpdateDocument(formattedDocument);
         }
     }
 }

@@ -15,6 +15,14 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="F5"
+                    Command="{Binding ActiveDocument.RunCommand}" />
+        <KeyBinding Gesture="Ctrl+S"
+                    Command="{Binding ActiveDocument.SaveCommand}" />
+        <KeyBinding Gesture="Ctrl+F8"
+                    Command="{Binding ActiveDocument.FormatCommand}" />
+    </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -68,7 +76,6 @@
                                                      IsModified="{Binding IsDirty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                      Loaded="CodeEditor_Loaded"
                                                      >
-                                <!--Document="{Binding Document, UpdateSourceTrigger=PropertyChanged}"-->
                             </editor:RoslynCodeEditor>
                         </DataTemplate>
                     </local:DocumentTemplateSelector.DocumentViewTemplate>                
