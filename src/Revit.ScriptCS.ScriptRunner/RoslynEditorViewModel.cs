@@ -166,6 +166,8 @@ namespace Revit.ScriptCS.ScriptRunner
                 dlg.Filter = "C# Script file (*.csx)|*.csx";
                 if ( dlg.ShowDialog().GetValueOrDefault() )
                     fileToSave.FilePath = dlg.FileName;
+                else
+                    return;
             }
 
             File.WriteAllText(fileToSave.FilePath, fileToSave.Text);

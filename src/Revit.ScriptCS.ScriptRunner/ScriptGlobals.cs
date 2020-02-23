@@ -8,6 +8,16 @@ namespace Revit.ScriptCS.ScriptRunner
     {
         public Document doc;
         public UIDocument uidoc;
-        public IProgress<string> progress;
+        private readonly IProgress<string> progress;
+
+        public ScriptGlobals(IProgress<string> Progress)
+        {
+            progress = Progress;
+        }
+
+        public void Print(string Message)
+        {
+            progress.Report(Message);
+        }
     }
 }

@@ -54,7 +54,7 @@
             <Button x:Name="Run" Command="{Binding ActiveDocument.RunCommand}" ToolTip="Run Script">
                 <ContentControl Template="{StaticResource ResourceKey=RunScript}"></ContentControl>
             </Button>
-            <ProgressBar Width="48" Height="16" Visibility ="{Binding IsRunning}" IsIndeterminate="True">
+            <ProgressBar Width="48" Height="16" Visibility ="{Binding IsRunning}" IsIndeterminate="True" Margin="4,0,0,0">
                 
             </ProgressBar>
         </ToolBar>
@@ -78,6 +78,7 @@
                                                      IsReadOnly="{Binding IsReadOnly}"
                                                      IsModified="{Binding IsDirty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                      Loaded="CodeEditor_Loaded"
+                                                     IsBraceCompletionEnabled="True"
                                                      >
                             </editor:RoslynCodeEditor>
                         </DataTemplate>
