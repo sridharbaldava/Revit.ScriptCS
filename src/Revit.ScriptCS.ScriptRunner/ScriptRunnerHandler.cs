@@ -17,6 +17,7 @@ namespace Revit.ScriptCS.ScriptRunner
         public string ScriptResult { get; private set; }
 
         public RoslynEditorViewModel RoslynEditorViewModel { get; set; }
+        public IProgress<string> Progress { get; set; }
 
         public void Execute(UIApplication app)
         {
@@ -38,9 +39,7 @@ namespace Revit.ScriptCS.ScriptRunner
                 "System.Linq"
             };
 
-            var progress = new Progress<string>(message => RoslynEditorViewModel.Result += message + Environment.NewLine);
-
-            ScriptGlobals globals = new ScriptGlobals(progress) { doc = app.ActiveUIDocument.Document, uidoc = app.ActiveUIDocument };
+            ScriptGlobals globals = new ScriptGlobals(Progress) { doc = app.ActiveUIDocument.Document, uidoc = app.ActiveUIDocument };
 
             var options = ScriptOptions.Default.AddReferences(assembliesToRef).WithImports(namespaces);
 

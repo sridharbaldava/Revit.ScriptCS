@@ -88,8 +88,8 @@ namespace Revit.ScriptCS.ScriptRunner
                         additionalAssemblies: assembliesToRef,
                         references: RoslynHostReferences.NamespaceDefault.With(typeNamespaceImports: new[] { typeof(UIApplication), typeof(Autodesk.Revit.DB.Document), typeof(Dictionary<,>), typeof(System.Linq.Enumerable), typeof(ScriptGlobals) }),
                         disabledDiagnostics: ImmutableArray.Create("CS1701", "CS1702", "CS0518"));
-
-                    var document = new RoslynEditorViewModel(roslynHost, externalEvent, handler);
+                                      
+                    var document = new RoslynEditorViewModel(roslynHost, externalEvent, handler);                    
 
                     scriptEditorThread = new Thread(new ThreadStart(() =>
                     {
@@ -98,7 +98,7 @@ namespace Revit.ScriptCS.ScriptRunner
                                 Dispatcher.CurrentDispatcher));
 
                         scriptEditor = new RoslynEditor(document);
-
+                        handler.Progress = new Progress<string>(message => document.Result += message + Environment.NewLine);
                         scriptEditor.Closed += (s, e) => Dispatcher.CurrentDispatcher.InvokeShutdown();
                         scriptEditor.Show();
                         Dispatcher.Run();
