@@ -54,6 +54,9 @@
             <Button x:Name="Run" Command="{Binding ActiveDocument.RunCommand}" ToolTip="Run Script">
                 <ContentControl Template="{StaticResource ResourceKey=RunScript}"></ContentControl>
             </Button>
+            <ProgressBar Width="48" Height="16" Visibility ="{Binding IsRunning}" IsIndeterminate="True">
+                
+            </ProgressBar>
         </ToolBar>
         <avalonDock:DockingManager x:Name="dockManager"
                                    DocumentsSource="{Binding Documents}"
@@ -88,7 +91,9 @@
             </avalonDock:LayoutRoot>
         </avalonDock:DockingManager>
         <!--<editor:RoslynCodeEditor x:Name="CodeEditor" SyntaxHighlighting="C#" Grid.Column="0" Grid.Row="1" ShowLineNumbers="False" Margin="5" Loaded="CodeEditor_Loaded"></editor:RoslynCodeEditor>-->
-        <TextBlock Text="{Binding Result}" Grid.Column="0" Grid.Row="2" Margin="5"></TextBlock>
+        <ScrollViewer Grid.Column="0" Grid.Row="2" Margin="5">
+            <TextBlock Text="{Binding Result}" ></TextBlock>
+        </ScrollViewer>
 
     </Grid>
 

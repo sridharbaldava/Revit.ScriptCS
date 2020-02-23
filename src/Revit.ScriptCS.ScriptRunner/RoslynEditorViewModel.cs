@@ -19,6 +19,9 @@ namespace Revit.ScriptCS.ScriptRunner
         private readonly ExternalEvent _externalEvent;
         private readonly ScriptRunnerHandler _scriptRunnerHandler;
         private string _result;
+        private DocumentViewModel _activeDocument = null;
+        private Visibility _isRunning = Visibility.Collapsed;
+
 
         public RoslynEditorViewModel(RevitRoslynHost host, ExternalEvent externalEvent, ScriptRunnerHandler scriptRunnerHandler)
         {
@@ -34,6 +37,12 @@ namespace Revit.ScriptCS.ScriptRunner
         {
             get { return _result; }
             set { SetProperty(ref _result, value); }
+        }
+
+        public Visibility IsRunning
+        {
+            get { return _isRunning; }
+            set { SetProperty(ref _isRunning, value); }
         }
 
         ObservableCollection<DocumentViewModel> _documents = new ObservableCollection<DocumentViewModel>();
@@ -117,7 +126,7 @@ namespace Revit.ScriptCS.ScriptRunner
             ActiveDocument = _documents.Last();
         }
 
-        private DocumentViewModel _activeDocument = null;
+        
         public DocumentViewModel ActiveDocument
         {
             get { return _activeDocument; }
@@ -165,6 +174,8 @@ namespace Revit.ScriptCS.ScriptRunner
 
         internal void Run(DocumentViewModel documentViewModel)
         {
+            Result = string.Empty;
+            IsRunning = Visibility.Visible;
             _scriptRunnerHandler.ScriptText = documentViewModel.Text;
             _externalEvent.Raise();
         }

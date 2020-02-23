@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Scripting;
 using System.Reflection;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Scripting.Hosting;
+using System;
 
 namespace Revit.ScriptCS.ScriptRunner
 {
@@ -37,19 +38,27 @@ namespace Revit.ScriptCS.ScriptRunner
                 "System.Linq"
             };
 
-            var globals = new ScriptGlobals { doc = app.ActiveUIDocument.Document, uidoc = app.ActiveUIDocument };
+            var progress = new Progress<string>(message => RoslynEditorViewModel.Result += message + Environment.NewLine);
+
+            var globals = new ScriptGlobals { doc = app.ActiveUIDocument.Document, uidoc = app.ActiveUIDocument, progress = progress };
 
             var options = ScriptOptions.Default.AddReferences(assembliesToRef).WithImports(namespaces);
-
 
             try
             {
                 object result = CSharpScript.EvaluateAsync<object>(ScriptText, options, globals).Result;
-                RoslynEditorViewModel.Result = CSharpObjectFormatter.Instance.FormatObject(result);
+                if(!(result is null))
+                    RoslynEditorViewModel.Result += CSharpObjectFormatter.Instance.FormatObject(result);
+                RoslynEditorViewModel.IsRunning = System.Windows.Visibility.Collapsed;
             }
             catch ( System.Exception ex )
             {
-                RoslynEditorViewModel.Result = CSharpObjectFormatter.Instance.FormatObject(ex);
+                RoslynEditorViewModel.Result += CSharpObjectFormatter.Instance.FormatObject(ex);
+                RoslynEditorViewModel.IsRunning = System.Windows.Visibility.Collapsed;
+            }
+            finally
+            {
+                RoslynEditorViewModel.IsRunning = System.Windows.Visibility.Collapsed;
             }
         }
 
