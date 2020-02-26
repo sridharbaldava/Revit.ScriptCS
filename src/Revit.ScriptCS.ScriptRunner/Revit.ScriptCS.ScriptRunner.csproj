@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveDocumentConverter.cs" />
+    <Compile Include="CodeActionsConverter.cs" />
     <Compile Include="DocumentTemplateSelector.cs" />
     <Compile Include="DocumentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

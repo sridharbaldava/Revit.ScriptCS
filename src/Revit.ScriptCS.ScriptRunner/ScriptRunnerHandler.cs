@@ -46,8 +46,18 @@ namespace Revit.ScriptCS.ScriptRunner
             try
             {
                 object result = CSharpScript.EvaluateAsync<object>(ScriptText, options, globals).Result;
-                if(!(result is null))
+                if ( !(result is null) )
                     RoslynEditorViewModel.Result += CSharpObjectFormatter.Instance.FormatObject(result) + Environment.NewLine;
+                RoslynEditorViewModel.IsRunning = System.Windows.Visibility.Collapsed;
+            }
+            catch ( AggregateException AggEx )
+            {
+                AggEx.Handle(ex =>
+                                {
+                                    RoslynEditorViewModel.Result += CSharpObjectFormatter.Instance.FormatObject(ex) + Environment.NewLine;
+                                    return true;
+                                }
+                            );
                 RoslynEditorViewModel.IsRunning = System.Windows.Visibility.Collapsed;
             }
             catch ( System.Exception ex )

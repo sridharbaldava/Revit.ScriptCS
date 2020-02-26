@@ -10,6 +10,9 @@ Powered by RoslynPad
 ## Intellisense completion window powered by roslyn
 ![Image of intellisense window](/docs/images/IntellisenseWindow.png)
 
+## Code fix suggesstions
+![Image of code fix suggestions](/docs/images/CodeFixes.png)
+
 ## Script output window
 ![Image of script output](/docs/images/ScriptOutput.png)
 

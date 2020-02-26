@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Revit.ScriptCS.ScriptRunner"
              xmlns:editor="clr-namespace:RoslynPad.Editor;assembly=RoslynPad.Editor.Windows"
-        xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
+             xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
+             xmlns:codeFixes="clr-namespace:RoslynPad.Roslyn.CodeFixes;assembly=RoslynPad.Roslyn"
+             xmlns:codeActions="clr-namespace:Microsoft.CodeAnalysis.CodeActions;assembly=Microsoft.CodeAnalysis.Workspaces"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Window.Resources>
@@ -13,6 +15,19 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Revit.ScriptCS.ScriptRunner;component/Resources/Icons.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+            <HierarchicalDataTemplate DataType="{x:Type codeFixes:CodeFixCollection}"
+                                  ItemsSource="{Binding Fixes, Mode=OneTime}">
+                <TextBlock Text="{Binding Provider, Mode=OneTime}" />
+            </HierarchicalDataTemplate>
+
+            <HierarchicalDataTemplate DataType="{x:Type codeFixes:CodeFix}"
+                                  ItemsSource="{Binding Action, Mode=OneTime, Converter={local:CodeActionsConverter}}">
+                <ContentPresenter Content="{Binding Action, Mode=OneTime}" />
+            </HierarchicalDataTemplate>
+
+            <DataTemplate DataType="{x:Type codeActions:CodeAction}">
+                <TextBlock Text="{Binding Title, Mode=OneTime}" />
+            </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
     <Window.InputBindings>
@@ -79,6 +94,7 @@
                                                      IsModified="{Binding IsDirty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                      Loaded="CodeEditor_Loaded"
                                                      IsBraceCompletionEnabled="True"
+                                                     ContextActionsIcon="{StaticResource ResourceKey=LightBulb}"
                                                      >
                             </editor:RoslynCodeEditor>
                         </DataTemplate>
