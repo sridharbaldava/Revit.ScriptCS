@@ -39,7 +39,7 @@ namespace Revit.ScriptCS.ScriptRunner
             editor.Document.TextChanged += documentViewModel.OnTextChanged;
         }
 
-        private void dockManager_DocumentClosing(object sender, Xceed.Wpf.AvalonDock.DocumentClosingEventArgs e)
+        private void dockManager_DocumentClosing(object sender, AvalonDock.DocumentClosingEventArgs e)
         {
             e.Cancel = true;
             var documentViewModel = (DocumentViewModel)e.Document.Content;

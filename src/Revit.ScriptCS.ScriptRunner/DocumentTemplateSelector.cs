@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Xceed.Wpf.AvalonDock.Layout;
+using AvalonDock.Layout;
 
 namespace Revit.ScriptCS.ScriptRunner
 {
