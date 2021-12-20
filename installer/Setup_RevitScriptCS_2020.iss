@@ -45,12 +45,7 @@ Source: "System.Reflection.Metadata.dll"; DestDir: "{app}"; Flags: replacesameve
 Source: "System.Runtime.CompilerServices.Unsafe.dll"; DestDir: "{app}"; Flags: replacesameversion
 Source: "System.Text.Encoding.CodePages.dll"; DestDir: "{app}"; Flags: replacesameversion
 Source: "System.Threading.Tasks.Extensions.dll"; DestDir: "{app}"; Flags: replacesameversion
-Source: "Xceed.Wpf.AvalonDock.dll"; DestDir: "{app}"; Flags: replacesameversion
-Source: "Xceed.Wpf.AvalonDock.Themes.Aero.dll"; DestDir: "{app}"; Flags: replacesameversion
-Source: "Xceed.Wpf.AvalonDock.Themes.Metro.dll"; DestDir: "{app}"; Flags: replacesameversion
-Source: "Xceed.Wpf.AvalonDock.Themes.VS2010.dll"; DestDir: "{app}"; Flags: replacesameversion
-Source: "Xceed.Wpf.Toolkit.dll"; DestDir: "{app}"; Flags: replacesameversion
-
+Source: "AvalonDock.dll"; DestDir: "{app}"; Flags: replacesameversion
 
 [code]
 { HANDLE INSTALL PROCESS STEPS }
