@@ -98,6 +98,7 @@ namespace Revit.ScriptCS.ScriptRunner
                                 Dispatcher.CurrentDispatcher));
 
                         scriptEditor = new RoslynEditor(document);
+                        scriptEditor.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                         handler.Progress = new Progress<string>(message => document.Result += message + Environment.NewLine);
                         scriptEditor.Closed += (s, e) => Dispatcher.CurrentDispatcher.InvokeShutdown();
                         scriptEditor.Show();
@@ -111,7 +112,7 @@ namespace Revit.ScriptCS.ScriptRunner
             }
             catch ( Exception ex )
             {
-                TaskDialog.Show("Error", ex.Message);
+                MessageBox.Show(ex.ToString());
                 //throw;
             }
         }

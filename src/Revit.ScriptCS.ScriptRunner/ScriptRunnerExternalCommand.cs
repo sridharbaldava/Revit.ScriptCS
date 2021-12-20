@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Revit.ScriptCS.ScriptRunner
 {
@@ -16,13 +17,13 @@ namespace Revit.ScriptCS.ScriptRunner
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
 			try
-			{
-				ScriptRunnerApp.thisApp.ShowWPF();
+            {
+                ScriptRunnerApp.thisApp.ShowWPF();
 				return Result.Succeeded;
 			}
 			catch ( Exception ex)
-			{
-                message = ex.Message;
+            {
+                MessageBox.Show(ex.ToString());
                 return Result.Failed;
             }
         }

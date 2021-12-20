@@ -1,27 +1,33 @@
-﻿<Window x:Class="Revit.ScriptCS.ScriptRunner.RoslynEditor"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Revit.ScriptCS.ScriptRunner"
-             xmlns:editor="clr-namespace:RoslynPad.Editor;assembly=RoslynPad.Editor.Windows"
-             xmlns:avalonDock="https://github.com/Dirkster99/AvalonDock"
-             xmlns:codeFixes="clr-namespace:RoslynPad.Roslyn.CodeFixes;assembly=RoslynPad.Roslyn"
-             xmlns:codeActions="clr-namespace:Microsoft.CodeAnalysis.CodeActions;assembly=Microsoft.CodeAnalysis.Workspaces"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<Window
+    x:Class="Revit.ScriptCS.ScriptRunner.RoslynEditor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:avalonDock="https://github.com/Dirkster99/AvalonDock"
+    xmlns:codeActions="clr-namespace:Microsoft.CodeAnalysis.CodeActions;assembly=Microsoft.CodeAnalysis.Workspaces"
+    xmlns:codeFixes="clr-namespace:RoslynPad.Roslyn.CodeFixes;assembly=RoslynPad.Roslyn"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:editor="clr-namespace:RoslynPad.Editor;assembly=RoslynPad.Editor.Windows"
+    xmlns:local="clr-namespace:Revit.ScriptCS.ScriptRunner"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance local:RoslynEditorViewModel}"
+    MinHeight="600"
+    MinWidth="400"
+    ResizeMode="CanResize"
+    Width="600"
+    Height="400"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Revit.ScriptCS.ScriptRunner;component/Resources/Icons.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/Revit.ScriptCS.ScriptRunner;component/Resources/Icons.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <HierarchicalDataTemplate DataType="{x:Type codeFixes:CodeFixCollection}"
-                                  ItemsSource="{Binding Fixes, Mode=OneTime}">
+            <HierarchicalDataTemplate DataType="{x:Type codeFixes:CodeFixCollection}" ItemsSource="{Binding Fixes, Mode=OneTime}">
                 <TextBlock Text="{Binding Provider, Mode=OneTime}" />
             </HierarchicalDataTemplate>
 
-            <HierarchicalDataTemplate DataType="{x:Type codeFixes:CodeFix}"
-                                  ItemsSource="{Binding Action, Mode=OneTime, Converter={local:CodeActionsConverter}}">
+            <HierarchicalDataTemplate DataType="{x:Type codeFixes:CodeFix}" ItemsSource="{Binding Action, Mode=OneTime, Converter={local:CodeActionsConverter}}">
                 <ContentPresenter Content="{Binding Action, Mode=OneTime}" />
             </HierarchicalDataTemplate>
 
@@ -31,57 +37,91 @@
         </ResourceDictionary>
     </Window.Resources>
     <Window.InputBindings>
-        <KeyBinding Key="F5"
-                    Command="{Binding ActiveDocument.RunCommand}" />
-        <KeyBinding Gesture="Ctrl+S"
-                    Command="{Binding ActiveDocument.SaveCommand}" />
-        <KeyBinding Gesture="Ctrl+F8"
-                    Command="{Binding ActiveDocument.FormatCommand}" />
+        <KeyBinding Key="F5" Command="{Binding ActiveDocument.RunCommand}" />
+        <KeyBinding Command="{Binding ActiveDocument.SaveCommand}" Gesture="Ctrl+S" />
+        <KeyBinding Command="{Binding ActiveDocument.FormatCommand}" Gesture="Ctrl+F8" />
     </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="4*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <!--<StackPanel HorizontalAlignment="Left" Grid.Column="0">
             <Button Name="ScriptRunner" Click="ScriptRunner_Click">Run Script</Button>
         </StackPanel>-->
-        <ToolBar Grid.Row="0">
-            <Button x:Name="New" Command="{Binding NewCommand}" ToolTip="New Script">
-                <ContentControl Template="{StaticResource ResourceKey=NewFile}"></ContentControl>
+        <DockPanel Grid.Row="0">
+            <Menu DockPanel.Dock="Top" Style="{x:Null}">
+                <MenuItem Header="File" Style="{x:Null}">
+                    <MenuItem Command="{Binding NewCommand}" Header="New Script" />
+                    <MenuItem Command="{Binding OpenCommand}" Header="Open Script" />
+                    <MenuItem Command="{Binding ActiveDocument.SaveCommand}" Header="Save" />
+                    <MenuItem Command="{Binding ActiveDocument.SaveAsCommand}" Header="Save As" />
+                    <MenuItem Header="Exit" />
+                </MenuItem>
+                <MenuItem Header="Run">
+                    <MenuItem Command="{Binding ActiveDocument.RunCommand}" Header="Debug" />
+                </MenuItem>
+                <MenuItem Header="Help">
+                    <MenuItem Header="About" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <ToolBar Grid.Row="1">
+            <Button
+                x:Name="New"
+                Command="{Binding NewCommand}"
+                ToolTip="New Script">
+                <ContentControl Template="{StaticResource ResourceKey=NewFile}" />
             </Button>
             <Button x:Name="Open" Command="{Binding OpenCommand}">
-                <ContentControl Template="{StaticResource ResourceKey=OpenFile}" ToolTip="Open Script"></ContentControl>
+                <ContentControl Template="{StaticResource ResourceKey=OpenFile}" ToolTip="Open Script" />
             </Button>
-            <Separator></Separator>
-            <Button x:Name="Save" Command="{Binding ActiveDocument.SaveCommand}" ToolTip="Save Script">
-                <ContentControl Template="{StaticResource ResourceKey=SaveFile}"></ContentControl>
+            <Separator />
+            <Button
+                x:Name="Save"
+                Command="{Binding ActiveDocument.SaveCommand}"
+                ToolTip="Save Script">
+                <ContentControl Template="{StaticResource ResourceKey=SaveFile}" />
             </Button>
-            <Button x:Name="Save_As" Command="{Binding ActiveDocument.SaveAsCommand}" ToolTip="Save As Script">
-                <ContentControl Template="{StaticResource ResourceKey=SaveAsFile}"></ContentControl>
+            <Button
+                x:Name="Save_As"
+                Command="{Binding ActiveDocument.SaveAsCommand}"
+                ToolTip="Save As Script">
+                <ContentControl Template="{StaticResource ResourceKey=SaveAsFile}" />
             </Button>
             <!--<Button x:Name="CloseScript" Command="{Binding ActiveDocument.CloseCommand}" Content="Close"></Button>-->
-            <Separator></Separator>
-            <Button x:Name="Run" Command="{Binding ActiveDocument.RunCommand}" ToolTip="Run Script">
-                <ContentControl Template="{StaticResource ResourceKey=RunScript}"></ContentControl>
+            <Separator />
+            <Button
+                x:Name="Run"
+                Command="{Binding ActiveDocument.RunCommand}"
+                ToolTip="Run Script">
+                <ContentControl Template="{StaticResource ResourceKey=RunScript}" />
             </Button>
-            <ProgressBar Width="48" Height="16" Visibility ="{Binding IsRunning}" IsIndeterminate="True" Margin="4,0,0,0">
-                
-            </ProgressBar>
+            <ProgressBar
+                Width="48"
+                Height="16"
+                Margin="4,0,0,0"
+                IsIndeterminate="True"
+                Visibility="{Binding IsRunning}" />
         </ToolBar>
-        <avalonDock:DockingManager x:Name="dockManager"
-                                   DocumentsSource="{Binding Documents}"
-                                   ActiveContent="{Binding ActiveDocument, Mode=TwoWay}"
-                                   DocumentClosing="dockManager_DocumentClosing"
-                                   Grid.Row="1">
+        <avalonDock:DockingManager
+            x:Name="dockManager"
+            Grid.Row="2"
+            ActiveContent="{Binding ActiveDocument, Mode=TwoWay}"
+            DocumentClosing="dockManager_DocumentClosing"
+            DocumentsSource="{Binding Documents}">
             <avalonDock:DockingManager.DocumentHeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Content.FileName, Mode=OneWay}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            Text="{Binding Content.FileName, Mode=OneWay}"
+                            TextTrimming="CharacterEllipsis" />
                     </StackPanel>
                 </DataTemplate>
             </avalonDock:DockingManager.DocumentHeaderTemplate>
@@ -89,27 +129,29 @@
                 <local:DocumentTemplateSelector>
                     <local:DocumentTemplateSelector.DocumentViewTemplate>
                         <DataTemplate>
-                            <editor:RoslynCodeEditor x:Name="CodeEditor"                                                      
-                                                     IsReadOnly="{Binding IsReadOnly}"
-                                                     IsModified="{Binding IsDirty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                     Loaded="CodeEditor_Loaded"
-                                                     IsBraceCompletionEnabled="True"
-                                                     ContextActionsIcon="{StaticResource ResourceKey=LightBulb}"
-                                                     >
-                            </editor:RoslynCodeEditor>
+                            <editor:RoslynCodeEditor
+                                x:Name="CodeEditor"
+                                ContextActionsIcon="{StaticResource ResourceKey=LightBulb}"
+                                IsBraceCompletionEnabled="True"
+                                IsModified="{Binding IsDirty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                IsReadOnly="{Binding IsReadOnly}"
+                                Loaded="CodeEditor_Loaded" />
                         </DataTemplate>
-                    </local:DocumentTemplateSelector.DocumentViewTemplate>                
+                    </local:DocumentTemplateSelector.DocumentViewTemplate>
                 </local:DocumentTemplateSelector>
             </avalonDock:DockingManager.LayoutItemTemplateSelector>
             <avalonDock:LayoutRoot>
                 <avalonDock:LayoutPanel Orientation="Vertical">
-                    <avalonDock:LayoutDocumentPane></avalonDock:LayoutDocumentPane>
+                    <avalonDock:LayoutDocumentPane />
                 </avalonDock:LayoutPanel>
             </avalonDock:LayoutRoot>
         </avalonDock:DockingManager>
         <!--<editor:RoslynCodeEditor x:Name="CodeEditor" SyntaxHighlighting="C#" Grid.Column="0" Grid.Row="1" ShowLineNumbers="False" Margin="5" Loaded="CodeEditor_Loaded"></editor:RoslynCodeEditor>-->
-        <ScrollViewer Grid.Column="0" Grid.Row="2" Margin="5">
-            <TextBlock Text="{Binding Result}" ></TextBlock>
+        <ScrollViewer
+            Grid.Row="3"
+            Grid.Column="0"
+            Margin="5">
+            <TextBlock Text="{Binding Result}" />
         </ScrollViewer>
 
     </Grid>
