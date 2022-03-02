@@ -112,7 +112,7 @@ namespace Revit.ScriptCS.ScriptRunner
             }
             catch ( Exception ex )
             {
-                MessageBox.Show(ex.ToString());
+                TaskDialog.Show("Error",ex.ToString());
                 //throw;
             }
         }
