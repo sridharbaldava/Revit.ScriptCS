@@ -19,7 +19,7 @@ namespace Revit.ScriptCS.ScriptRunner.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -61,9 +61,7 @@ namespace Revit.ScriptCS.ScriptRunner.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;ResourceDictionary
-        ///    xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
-        ///    xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+        ///   Looks up a localized string similar to &lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
         ///    &lt;ControlTemplate x:Key=&quot;OpenFile&quot;&gt;
         ///        &lt;Viewbox Width=&quot;16&quot; Height=&quot;16&quot;&gt;
         ///            &lt;Rectangle Width=&quot;16&quot; Height=&quot;16&quot;&gt;
@@ -72,7 +70,7 @@ namespace Revit.ScriptCS.ScriptRunner.Properties {
         ///                        &lt;DrawingBrush.Drawing&gt;
         ///                            &lt;DrawingGroup&gt;
         ///                                &lt;DrawingGroup.Children&gt;
-        ///          [rest of string was truncated]&quot;;.
+        ///                     [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Icons {
             get {

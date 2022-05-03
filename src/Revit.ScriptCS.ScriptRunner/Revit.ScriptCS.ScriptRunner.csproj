@@ -25,7 +25,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <ProjectGuid>{F831E5C7-ABC5-476A-88CB-638783F266D0}</ProjectGuid>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup>
@@ -63,11 +63,11 @@
       <HintPath>..\..\lib\RoslynPad.Roslyn.Windows.dll</HintPath>
     </Reference>
     <Reference Include="RevitAPI">
-      <HintPath>$(ProgramW6432)\Autodesk\Revit 2019\RevitAPI.dll</HintPath>
+      <HintPath>$(ProgramW6432)\Autodesk\Revit 2022\RevitAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitAPIUI">
-      <HintPath>$(ProgramW6432)\Autodesk\Revit 2019\RevitAPIUI.dll</HintPath>
+      <HintPath>$(ProgramW6432)\Autodesk\Revit 2022\RevitAPIUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
