@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.UI;
+using Microsoft.CodeAnalysis;
 using RoslynPad.Editor;
 using RoslynPad.Roslyn;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Revit.ScriptCS.ScriptRunner
             DataContext = document;            
         }
 
-        private void CodeEditor_Loaded(object sender, RoutedEventArgs e)
+        private async void CodeEditor_Loaded(object sender, RoutedEventArgs e)
         {
             var editor = (RoslynCodeEditor)sender;
             editor.Loaded -= CodeEditor_Loaded;
@@ -32,8 +33,8 @@ namespace Revit.ScriptCS.ScriptRunner
             var documentViewModel = (DocumentViewModel)editor.DataContext;
             var workingDirectory = Directory.GetCurrentDirectory();
 
-            var documentId = editor.Initialize(viewModel.Host, new ClassificationHighlightColors(),
-                workingDirectory, string.Empty);
+            var documentId = await editor.InitializeAsync(viewModel.Host, new ClassificationHighlightColors(),
+                workingDirectory, string.Empty, SourceCodeKind.Script).ConfigureAwait(false);
 
             documentViewModel.Initialize(documentId);
             editor.Document.TextChanged += documentViewModel.OnTextChanged;

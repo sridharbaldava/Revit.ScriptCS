@@ -1,9 +1,8 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29709.97
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34601.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Revit.ScriptCS.ScriptRunner", "src\Revit.ScriptCS.ScriptRunner\Revit.ScriptCS.ScriptRunner.csproj", "{F831E5C7-ABC5-476A-88CB-638783F266D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Revit.ScriptCS.ScriptRunner", "src\Revit.ScriptCS.ScriptRunner\Revit.ScriptCS.ScriptRunner.csproj", "{F831E5C7-ABC5-476A-88CB-638783F266D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
